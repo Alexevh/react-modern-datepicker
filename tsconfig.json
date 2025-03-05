@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "NodeNext",
+      "moduleResolution": "nodenext",
+      "baseUrl": "./",
+      "paths": {
+        "*": ["node_modules/*", "src/*"]
+      },
+      "jsx": "react",
+      "declaration": true,
+      "outDir": "./dist"
+    },
+    "include": ["src/**/*"]
+  }
