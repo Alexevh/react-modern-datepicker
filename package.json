@@ -1,6 +1,6 @@
 {
   "name": "react-mdp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A modern datepicker library for React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,15 +21,19 @@
   "author": "Alex",
   "license": "MIT",
   "dependencies": {
-    "date-fns": "^4.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "date-fns": "^4.1.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "@types/date-fns": "^2.5.3",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
+    "@types/react": "^17.0.67",
+    "@types/react-dom": "^17.0.21",
     "jest": "^26.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "typescript": "^5.8.2"
   },
   "files": [

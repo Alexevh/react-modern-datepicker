@@ -9,6 +9,14 @@ To install the package, run:
 npm install react-mdp
 ```
 
+### Peer Dependencies
+This package has the following peer dependencies:
+```
+react: ^16.8.0 || ^17.0.0 || ^18.0.0
+react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+```
+Make sure these are installed in your project.
+
 ## Usage
 Here is a simple example of how to use the date picker in your React component:
 ```javascript
@@ -25,8 +33,6 @@ const App = () => {
 };
 
 export default App;
-
-
 ```
 
 You can also pass the date or range to control
@@ -67,9 +73,6 @@ You can also pass the date or range to control
             placeholder="Select date range..."
           />
         </div>
-
-```
-
 
 ## Contributing
 If you would like to contribute to this project, please follow these steps:
