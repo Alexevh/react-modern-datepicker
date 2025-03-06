@@ -4,11 +4,13 @@ import './DatePicker.css';
 
 interface DatePickerProps {
     selectedDate?: Date;
-    dateFormat?: string;
-    isRange?: boolean;
     onDateChange?: (date: Date | null) => void;
+    isRange?: boolean;
     onRangeChange?: (range: { start: Date | null; end: Date | null }) => void;
+    dateFormat?: string;
     placeholder?: string;
+    selectionColor?: string;
+    hoverColor?: string;
     className?: string;
 }
 
@@ -16,11 +18,13 @@ const DEFAULT_FORMAT = 'MM/dd/yyyy';
 
 const DatePicker: React.FC<DatePickerProps> = ({
     selectedDate,
-    dateFormat = DEFAULT_FORMAT,
-    isRange = false,
     onDateChange,
+    isRange,
     onRangeChange,
+    dateFormat = DEFAULT_FORMAT,
     placeholder = 'Select a date',
+    selectionColor = '#007bff',
+    hoverColor = '#0056b3',
     className = ''
 }) => {
     const [currentDate, setCurrentDate] = useState(selectedDate || new Date());
@@ -113,6 +117,30 @@ const DatePicker: React.FC<DatePickerProps> = ({
         }
     };
 
+    const handleMouseEnter = (day: number) => {
+        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+        if (!isDateDisabled(day)) {
+            const calendarDays = document.querySelectorAll('.calendar-day');
+            calendarDays.forEach((dayElement, index) => {
+                if (index + 1 === day) {
+                    (dayElement as HTMLElement).style.backgroundColor = hoverColor;
+                }
+            });
+        }
+    };
+
+    const handleMouseLeave = (day: number) => {
+        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+        if (!isDateDisabled(day)) {
+            const calendarDays = document.querySelectorAll('.calendar-day');
+            calendarDays.forEach((dayElement, index) => {
+                if (index + 1 === day) {
+                    (dayElement as HTMLElement).style.backgroundColor = '';
+                }
+            });
+        }
+    };
+
     const renderCalendar = () => {
         const days = [];
         const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -144,7 +172,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
                         ${isStart ? 'range-start' : ''} 
                         ${isEnd ? 'range-end' : ''}`
                     }
+                    style={{ backgroundColor: inRange ? selectionColor : '' }}
                     onClick={() => !disabled && handleDateSelect(day)}
+                    onMouseEnter={() => handleMouseEnter(day)}
+                    onMouseLeave={() => handleMouseLeave(day)}
                 >
                     {day}
                 </div>

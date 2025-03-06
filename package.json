@@ -1,6 +1,6 @@
 {
-  "name": "react-modern-datepicker",
-  "version": "1.0.0",
+  "name": "react-mdp",
+  "version": "1.0.1",
   "description": "A modern datepicker library for React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

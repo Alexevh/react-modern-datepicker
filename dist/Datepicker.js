@@ -38,12 +38,12 @@ var date_fns_1 = require("date-fns");
 require("./DatePicker.css");
 var DEFAULT_FORMAT = 'MM/dd/yyyy';
 var DatePicker = function (_a) {
-    var selectedDate = _a.selectedDate, _b = _a.dateFormat, dateFormat = _b === void 0 ? DEFAULT_FORMAT : _b, _c = _a.isRange, isRange = _c === void 0 ? false : _c, onDateChange = _a.onDateChange, onRangeChange = _a.onRangeChange, _d = _a.placeholder, placeholder = _d === void 0 ? 'Select a date' : _d, _e = _a.className, className = _e === void 0 ? '' : _e;
-    var _f = (0, react_1.useState)(selectedDate || new Date()), currentDate = _f[0], setCurrentDate = _f[1];
-    var _g = (0, react_1.useState)(null), rangeStart = _g[0], setRangeStart = _g[1];
-    var _h = (0, react_1.useState)(null), rangeEnd = _h[0], setRangeEnd = _h[1];
-    var _j = (0, react_1.useState)(false), isOpen = _j[0], setIsOpen = _j[1];
-    var _k = (0, react_1.useState)(''), inputValue = _k[0], setInputValue = _k[1];
+    var selectedDate = _a.selectedDate, onDateChange = _a.onDateChange, isRange = _a.isRange, onRangeChange = _a.onRangeChange, _b = _a.dateFormat, dateFormat = _b === void 0 ? DEFAULT_FORMAT : _b, _c = _a.placeholder, placeholder = _c === void 0 ? 'Select a date' : _c, _d = _a.selectionColor, selectionColor = _d === void 0 ? '#007bff' : _d, _e = _a.hoverColor, hoverColor = _e === void 0 ? '#0056b3' : _e, _f = _a.className, className = _f === void 0 ? '' : _f;
+    var _g = (0, react_1.useState)(selectedDate || new Date()), currentDate = _g[0], setCurrentDate = _g[1];
+    var _h = (0, react_1.useState)(null), rangeStart = _h[0], setRangeStart = _h[1];
+    var _j = (0, react_1.useState)(null), rangeEnd = _j[0], setRangeEnd = _j[1];
+    var _k = (0, react_1.useState)(false), isOpen = _k[0], setIsOpen = _k[1];
+    var _l = (0, react_1.useState)(''), inputValue = _l[0], setInputValue = _l[1];
     var calendarRef = (0, react_1.useRef)(null);
     var today = (0, date_fns_1.startOfDay)(new Date());
     var daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
@@ -121,6 +121,28 @@ var DatePicker = function (_a) {
             }
         }
     };
+    var handleMouseEnter = function (day) {
+        var date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+        if (!isDateDisabled(day)) {
+            var calendarDays = document.querySelectorAll('.calendar-day');
+            calendarDays.forEach(function (dayElement, index) {
+                if (index + 1 === day) {
+                    dayElement.style.backgroundColor = hoverColor;
+                }
+            });
+        }
+    };
+    var handleMouseLeave = function (day) {
+        var date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+        if (!isDateDisabled(day)) {
+            var calendarDays = document.querySelectorAll('.calendar-day');
+            calendarDays.forEach(function (dayElement, index) {
+                if (index + 1 === day) {
+                    dayElement.style.backgroundColor = '';
+                }
+            });
+        }
+    };
     var renderCalendar = function () {
         var days = [];
         var weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -135,7 +157,7 @@ var DatePicker = function (_a) {
             var inRange = isDateInRange(day);
             var isStart = (rangeStart === null || rangeStart === void 0 ? void 0 : rangeStart.getDate()) === day && (rangeStart === null || rangeStart === void 0 ? void 0 : rangeStart.getMonth()) === currentDate.getMonth();
             var isEnd = (rangeEnd === null || rangeEnd === void 0 ? void 0 : rangeEnd.getDate()) === day && (rangeEnd === null || rangeEnd === void 0 ? void 0 : rangeEnd.getMonth()) === currentDate.getMonth();
-            days.push(react_1.default.createElement("div", { key: day, className: "calendar-day \n                        ".concat(disabled ? 'disabled' : '', " \n                        ").concat(inRange ? 'in-range' : '', " \n                        ").concat(isStart ? 'range-start' : '', " \n                        ").concat(isEnd ? 'range-end' : ''), onClick: function () { return !disabled && handleDateSelect(day); } }, day));
+            days.push(react_1.default.createElement("div", { key: day, className: "calendar-day \n                        ".concat(disabled ? 'disabled' : '', " \n                        ").concat(inRange ? 'in-range' : '', " \n                        ").concat(isStart ? 'range-start' : '', " \n                        ").concat(isEnd ? 'range-end' : ''), style: { backgroundColor: inRange ? selectionColor : '' }, onClick: function () { return !disabled && handleDateSelect(day); }, onMouseEnter: function () { return handleMouseEnter(day); }, onMouseLeave: function () { return handleMouseLeave(day); } }, day));
         };
         for (var day = 1; day <= daysInMonth; day++) {
             _loop_1(day);
