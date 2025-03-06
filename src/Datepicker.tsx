@@ -1,6 +1,6 @@
  import React, { useState, useRef, useEffect } from 'react';
 import { format, addMonths, subMonths, isBefore, startOfDay, endOfMonth, parse } from 'date-fns';
-import './Datepicker.css';
+import './DatePicker.css';
 
 interface DatePickerProps {
     selectedDate?: Date;

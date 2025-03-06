@@ -1,11 +1,12 @@
 {
   "name": "react-mdp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A modern datepicker library for React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-css",
+    "copy-css": "copy src\\DatePicker.css dist\\DatePicker.css",
     "test": "jest"
   },
   "repository": {
@@ -26,12 +27,12 @@
   },
   "devDependencies": {
     "@types/date-fns": "^2.5.3",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "jest": "^26.0.0",
     "typescript": "^5.8.2"
   },
   "files": [
-    "dist/",
-    "src/Datepicker.css",
-    "src/Datepicker.css"
+    "dist/"
   ]
 }
