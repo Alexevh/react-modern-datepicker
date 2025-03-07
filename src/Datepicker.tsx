@@ -120,24 +120,20 @@ const DatePicker: React.FC<DatePickerProps> = ({
     const handleMouseEnter = (day: number) => {
         const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
         if (!isDateDisabled(day)) {
-            const calendarDays = document.querySelectorAll('.calendar-day');
-            calendarDays.forEach((dayElement, index) => {
-                if (index + 1 === day) {
-                    (dayElement as HTMLElement).style.backgroundColor = hoverColor;
-                }
-            });
+            const dayElement = document.querySelector(`.calendar-day:not(.weekday):not(.empty)[data-day="${day}"]`);
+            if (dayElement) {
+                (dayElement as HTMLElement).style.backgroundColor = hoverColor;
+            }
         }
     };
 
     const handleMouseLeave = (day: number) => {
         const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
         if (!isDateDisabled(day)) {
-            const calendarDays = document.querySelectorAll('.calendar-day');
-            calendarDays.forEach((dayElement, index) => {
-                if (index + 1 === day) {
-                    (dayElement as HTMLElement).style.backgroundColor = '';
-                }
-            });
+            const dayElement = document.querySelector(`.calendar-day:not(.weekday):not(.empty)[data-day="${day}"]`);
+            if (dayElement) {
+                (dayElement as HTMLElement).style.backgroundColor = '';
+            }
         }
     };
 
@@ -172,6 +168,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                         ${isStart ? 'range-start' : ''} 
                         ${isEnd ? 'range-end' : ''}`
                     }
+                    data-day={day}
                     style={{ backgroundColor: inRange ? selectionColor : '' }}
                     onClick={() => !disabled && handleDateSelect(day)}
                     onMouseEnter={() => handleMouseEnter(day)}

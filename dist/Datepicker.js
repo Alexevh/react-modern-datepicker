@@ -124,23 +124,19 @@ var DatePicker = function (_a) {
     var handleMouseEnter = function (day) {
         var date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
         if (!isDateDisabled(day)) {
-            var calendarDays = document.querySelectorAll('.calendar-day');
-            calendarDays.forEach(function (dayElement, index) {
-                if (index + 1 === day) {
-                    dayElement.style.backgroundColor = hoverColor;
-                }
-            });
+            var dayElement = document.querySelector(".calendar-day:not(.weekday):not(.empty)[data-day=\"".concat(day, "\"]"));
+            if (dayElement) {
+                dayElement.style.backgroundColor = hoverColor;
+            }
         }
     };
     var handleMouseLeave = function (day) {
         var date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
         if (!isDateDisabled(day)) {
-            var calendarDays = document.querySelectorAll('.calendar-day');
-            calendarDays.forEach(function (dayElement, index) {
-                if (index + 1 === day) {
-                    dayElement.style.backgroundColor = '';
-                }
-            });
+            var dayElement = document.querySelector(".calendar-day:not(.weekday):not(.empty)[data-day=\"".concat(day, "\"]"));
+            if (dayElement) {
+                dayElement.style.backgroundColor = '';
+            }
         }
     };
     var renderCalendar = function () {
@@ -157,7 +153,7 @@ var DatePicker = function (_a) {
             var inRange = isDateInRange(day);
             var isStart = (rangeStart === null || rangeStart === void 0 ? void 0 : rangeStart.getDate()) === day && (rangeStart === null || rangeStart === void 0 ? void 0 : rangeStart.getMonth()) === currentDate.getMonth();
             var isEnd = (rangeEnd === null || rangeEnd === void 0 ? void 0 : rangeEnd.getDate()) === day && (rangeEnd === null || rangeEnd === void 0 ? void 0 : rangeEnd.getMonth()) === currentDate.getMonth();
-            days.push(react_1.default.createElement("div", { key: day, className: "calendar-day \n                        ".concat(disabled ? 'disabled' : '', " \n                        ").concat(inRange ? 'in-range' : '', " \n                        ").concat(isStart ? 'range-start' : '', " \n                        ").concat(isEnd ? 'range-end' : ''), style: { backgroundColor: inRange ? selectionColor : '' }, onClick: function () { return !disabled && handleDateSelect(day); }, onMouseEnter: function () { return handleMouseEnter(day); }, onMouseLeave: function () { return handleMouseLeave(day); } }, day));
+            days.push(react_1.default.createElement("div", { key: day, className: "calendar-day \n                        ".concat(disabled ? 'disabled' : '', " \n                        ").concat(inRange ? 'in-range' : '', " \n                        ").concat(isStart ? 'range-start' : '', " \n                        ").concat(isEnd ? 'range-end' : ''), "data-day": day, style: { backgroundColor: inRange ? selectionColor : '' }, onClick: function () { return !disabled && handleDateSelect(day); }, onMouseEnter: function () { return handleMouseEnter(day); }, onMouseLeave: function () { return handleMouseLeave(day); } }, day));
         };
         for (var day = 1; day <= daysInMonth; day++) {
             _loop_1(day);
