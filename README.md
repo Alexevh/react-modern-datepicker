@@ -73,7 +73,7 @@ You can also pass the date or range to control
             placeholder="Select date range..."
           />
         </div>
-
+```
 ## Contributing
 If you would like to contribute to this project, please follow these steps:
 1. Fork the repository.
