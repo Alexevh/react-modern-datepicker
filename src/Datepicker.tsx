@@ -12,6 +12,7 @@ interface DatePickerProps {
     selectionColor?: string;
     hoverColor?: string;
     className?: string;
+    allowPastDate?: boolean;
 }
 
 const DEFAULT_FORMAT = 'MM/dd/yyyy';
@@ -25,7 +26,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
     placeholder = 'Select a date',
     selectionColor = '#007bff',
     hoverColor = '#0056b3',
-    className = ''
+    className = '',
+    allowPastDate = false
 }) => {
     const [currentDate, setCurrentDate] = useState(selectedDate || new Date());
     const [rangeStart, setRangeStart] = useState<Date | null>(null);
@@ -69,7 +71,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
     const isDateDisabled = (day: number) => {
         const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        return isBefore(date, today);
+        return !allowPastDate ? isBefore(date, today) : false;
     };
 
     const isDateInRange = (day: number) => {
