@@ -17,6 +17,11 @@ react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 ```
 Make sure these are installed in your project.
 
+![image](https://github.com/user-attachments/assets/b32480d8-f591-43ec-a2e9-3f35d80b826d)
+
+![image](https://github.com/user-attachments/assets/3fca99cc-104b-4682-86a0-2b53ca26002a)
+
+
 ## Usage
 Here is a simple example of how to use the date picker in your React component:
 ```javascript
